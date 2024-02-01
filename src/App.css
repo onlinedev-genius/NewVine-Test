@@ -184,6 +184,14 @@ span {
   margin: 0 10px;
 }
 
+.modal-title {
+  width: fit-content;
+  border-bottom: 1px solid #d9d9d9;
+  padding-bottom: 15px;
+  margin: 40px auto 40px auto;
+  color: #1c3e6e;
+}
+
 .modal-footer {
   margin-top: 40px;
 }
@@ -206,4 +214,26 @@ span {
 .ant-radio-wrapper:hover .ant-radio-wrapper,
 .ant-radio-wrapper:hover .ant-radio-inner {
   border-color: #1c3e6e;
+}
+
+.ant-modal .ant-modal-close {
+  inset-inline-end: unset;
+  inset-inline-start: 17px;
+  background-color: #1c3e6e;
+  color: #ffffff;
+  width: 30px;
+  height: 30px;
+}
+
+.ant-modal .ant-modal-close .ant-modal-close-x {
+  color: #ffffff;
+}
+
+.ant-modal .ant-modal-close:hover {
+  background-color: #ffffff;
+  border: 1px solid #1c3e6e;
+}
+
+.ant-modal .ant-modal-close:hover .ant-modal-close-x {
+  color: #1c3e6e;
 }

@@ -131,7 +131,7 @@ function App() {
       >
         <Row gutter={20}>
           <Col span={24}>
-            <h1>Document Upload</h1>
+            <h1 className='t-align-center modal-title'>Document Upload</h1>
           </Col>
         </Row>
         <Row gutter={20}>
