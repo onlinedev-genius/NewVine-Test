@@ -4,6 +4,14 @@ import { Col, Row, Button, Divider, Modal, Select, message, Upload, Switch, Radi
 import { ClockCircleOutlined, FileTextFilled, InboxOutlined, MinusCircleFilled, PlusCircleFilled, UploadOutlined } from '@ant-design/icons';
 import { clients } from './utils/vars';
 
+const clientOptions = [
+  {
+    label: 'Select Client',
+    value: ''
+  },
+  ...clients
+];
+
 const { Dragger } = Upload;
 
 const draggerProps = {
@@ -30,7 +38,8 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [splitSchedule, setSplitSchedule] = useState(1);
   const [clientType, setClientType] = useState(1);
-  const [selectedClients, setSelectedClients] = useState([{ value: '', label: '' }]);
+  const [singleSelectedClient, setSingleSelectedClient] = useState({ value: '' , label: 'Select Client' })
+  const [selectedClients, setSelectedClients] = useState([{ value: '', label: 'Select Client' }]);
   const [isTolerance, setIsTolerance] = useState(true);
 
   const showModal = () => {
@@ -70,7 +79,7 @@ function App() {
     setSelectedClients([
       ...selectedClients,
       {
-        label: '',
+        label: 'Select Client',
         value: '',
       }
     ]);
@@ -87,13 +96,17 @@ function App() {
   };
 
   const onSelectSelectedClients = (e, index) => {
-    const selectedClients0 = selectedClients;
+    if (clientType == 1) {
+      setSingleSelectedClient(clientOptions.filter((client) => client.value == e)[0]);
+    }else {
+      const selectedClients0 = selectedClients;
 
-    selectedClients0[index] = clients.filter((client) => client.value == e)[0];
+      selectedClients0[index] = clientOptions.filter((client) => client.value == e)[0];
 
-    setSelectedClients([
-      ...selectedClients0,
-    ]);
+      setSelectedClients([
+        ...selectedClients0,
+      ]);
+    }
   }
   
   return (
@@ -200,15 +213,17 @@ function App() {
                     <Col span="24">
                       <span>Testing Center </span>
                       <Select
-                        options={clients}
+                        options={clientOptions}
                         style={{ width: 120, marginLeft: 20 }}
+                        value={singleSelectedClient}
+                        onSelect={(e) => onSelectSelectedClients(e, 0)}
                       />
                     </Col>) : selectedClients.map((el, index) => (
                     <Col key={index} span="24" className='mb-2 d-flex i-align-center'>
                       <span>Testing Center {index + 1}</span>
                       <Select
                         style={{ width: 120, marginLeft: 20 }}
-                        options={clients}
+                        options={clientOptions}
                         value={el.value}
                         onSelect={(e) => onSelectSelectedClients(e, index)}
                       />
